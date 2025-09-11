@@ -5,6 +5,7 @@ import foto4 from '../assets/lol.jpg'
 import Ray from "./ray"
 import Estrella from './Estrellas'
 import Boton from './boton'
+import Modal from './modal'
 import { useState } from 'react'
 
 function Galeria() {
@@ -27,7 +28,11 @@ function Galeria() {
         const promedio = prom.reduce((total, lol)=>total + lol.rate, 0)
         const prome = promedio/prom.length;
         console.log(prome);
+        setModal(true);
     }
+
+    const [modal, setModal] = useState(false);
+    
     
 
     return (
@@ -45,6 +50,8 @@ function Galeria() {
             </div>
             
             <Boton avisaProm={promedio}/>
+
+            <Modal modal={modal} setModal={setModal}></Modal>
          </div>
            
         </>
