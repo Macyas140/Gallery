@@ -1,19 +1,15 @@
-import Ray from "./ray"
-import Galeria from "./galeria"
 import foto1 from '../assets/pomni.jpg'
+function Envia({ onClick, children }) {
 
-function Boton({ avisaProm }) {
-    const k = () => {
-        avisaProm();
-    }
     const imga = [foto1];
     return (
         <>
 
             <div className="bot">
-                <button className="boton" onClick={k}>
-
+                <button className="boton" onClick={() => onClick()}>
+                    {children}
                     <img src={imga} alt="" className="pomn" />
+
 
                 </button>
             </div>
@@ -23,4 +19,4 @@ function Boton({ avisaProm }) {
 
 }
 
-export default Boton
+export default Envia
