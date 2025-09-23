@@ -1,18 +1,24 @@
 import Estrella from "./Estrellas"
-import { useState } from 'react'
+import { useState, forwardRef, useImperativeHandle } from 'react'
 
 
 
 
-function Ray({ avisaCambio, index }) {
+const Ray = forwardRef(({ avisaCambio, index }, ref) => {
 
   const stars = [1, 2, 3, 4, 5]
-  const [raeting, setRaiting] = useState(0)
+  const [raeting, setRaiting] = useState(0);
+
+  useImperativeHandle(ref, () => (
+    { resetear: () => { setRaiting(0) } }
+  ))
+
   const califica = (star) => {
     setRaiting(star);
     avisaCambio(index, star);
   }
 
+  
   return (
     <>
 
@@ -26,6 +32,6 @@ function Ray({ avisaCambio, index }) {
       </div>
     </>
   )
-}
+})
 
 export default Ray

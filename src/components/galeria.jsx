@@ -7,14 +7,14 @@ import Estrella from './Estrellas'
 import Boton from './boton'
 import Modal from './modal'
 import Envia from './envia'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 
 function Galeria() {
     const [imagenes, setImages] = useState([
-        { id: 1, src: foto1, rate: 0 },
-        { id: 2, src: foto2, rate: 0 },
-        { id: 3, src: foto3, rate: 0 },
-        { id: 4, src: foto4, rate: 0 },
+        { id: 1, src: foto1, rate: 0, ref: useRef() },
+        { id: 2, src: foto2, rate: 0, ref: useRef() },
+        { id: 3, src: foto3, rate: 0, ref: useRef() },
+        { id: 4, src: foto4, rate: 0, ref:useRef() },
     ]);
 
     const ordenaImagenes = (index, rate) => {
@@ -37,6 +37,8 @@ function Galeria() {
         const newImages = [...imagenes];
         newImages.map((img) => (img.rate = 0));
         setImages(newImages);
+        imagenes.map((img)=>img.ref.current.resetear());
+        setModal(false);
     }
 
     const [modal, setModal] = useState(false);
@@ -51,7 +53,7 @@ function Galeria() {
                     {imagenes.map((img, i) => (
                         <div className="kard" key={img.id}>
                             <img src={img.src} alt="imagen" className="imagenes" />
-                            <Ray avisaCambio={ordenaImagenes} index={i} />
+                            <Ray ref={img.ref} avisaCambio={ordenaImagenes} index={i} />
 
                         </div>
                     ))}
